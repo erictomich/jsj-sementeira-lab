@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/nosleep/0.12.0/NoSleep.min.js" integrity="sha512-DSzvYfxJWRi3E6vfcGQfL5CqOlApxYrrdqRP3hRCnoiZ0oM6+ccYjbtdzQFUrAOI/ehKk0VKFuKs5GseGPkVjQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>Chi Mental - Contador</title>
+</head>
+<body>
+    <!-- 
+        https://tailwindcomponents.com/component/countdown-timer
+    -->
+    <div class="min-w-screen min-h-screen bg-yellow-500 flex items-center justify-center px-5 py-5">
+        <div class="">
+            <h1 class="text-4xl text-center mb-3 font-bold text-violet-600 mb-5">Fluxo do Estômago</h1>
+            <div class="text-6xl text-center flex w-full items-center justify-center">
+                
+                <div class="w-24 mx-1 p-2 bg-white text-yellow-500 rounded-lg">
+                    <div class="font-mono leading-none" x-text="minutes" id="minutos">00</div>
+                    <div class="font-mono uppercase text-sm leading-none">Minutos</div>
+                </div>
+                <div class="w-24 mx-1 p-2 bg-white text-yellow-500 rounded-lg">
+                    <div class="font-mono leading-none" x-text="seconds" id="segundos">00</div>
+                    <div class="font-mono uppercase text-sm leading-none">Segundos</div>
+                </div>
+            </div>
+            <div class="text-6xl text-center flex w-full items-center justify-center mt-20">
+                <button id="btStart" class="px-4 py-2 font-semibold text-sm bg-violet-500 text-white rounded-md shadow-sm hover:scale-125 ease-in-out duration-150 mx-2 p-1">Começa</button>
+                <button id="btPause" class="px-4 py-2 font-semibold text-sm bg-violet-500 text-white rounded-md shadow-sm hover:scale-125 ease-in-out duration-150 mx-2 p-1">Pausa</button>
+                <button id="btStop" class="px-4 py-2 font-semibold text-sm bg-violet-500 text-white rounded-md shadow-sm hover:scale-125 ease-in-out duration-150 mx-2 p-1">Reinicia</button>
+            </div>
+           
+            
+        </div>
+    </div>
+
+    <audio src="bell.wav" class="bell"></audio>
+    <audio src="alterna.wav" class="alterna"></audio>
+    
+
+
+    <script>
+        var noSleep = new NoSleep();
+
+        var segundosTotais = 480;
+        var segundosAlerta = 60;
+        var segundosContagem = 0;
+        var contadorLigado = 0;
+
+        var minutos = document.getElementById('minutos');
+        var segundos = document.getElementById('segundos');
+
+        const bell = document.querySelector('.bell');
+        const alterna =  document.querySelector('.alterna');
+
+        minutos.innerHTML = "00";
+        segundos.innerHTML = "00";
+        
+        
+
+        document.getElementById('btStart').onclick = start;
+        document.getElementById('btStop').onclick = stop;
+        document.getElementById('btPause').onclick = pause;
+
+        var contagem;
+
+        function start() {
+            if(contadorLigado == 0) {
+                ligar(1);
+                contagem = setInterval(ligar, 1000);
+            }
+            contadorLigado = 1;
+            alterna.play();
+            noSleep.enable();
+        }
+
+        function stop() {
+            clearInterval(contagem);
+            minutos.innerHTML = "00";
+            segundos.innerHTML = "00";
+            contadorLigado = 0;
+            segundosContagem = 0;
+            noSleep.disable();
+        }
+
+        function finaliza() { // sem reiniciar o relógio
+            clearInterval(contagem);
+            contadorLigado = 0;
+            noSleep.disable();
+        }
+
+        function pause() {
+            clearInterval(contagem);
+            contadorLigado = 0;
+            noSleep.disable();
+        }
+
+        function ligar(inicio = 0) {
+            var min = minutos.innerHTML;
+            var seg = segundos.innerHTML;
+
+            if (inicio == 0) {
+                segundosContagem++;
+               
+            }
+            
+            
+            
+            if( seg == 59 && min >= 0) {
+                min++;
+                seg = 0;
+            }
+            else if( seg <= 59 && inicio == 0) { 
+                seg++;
+                console.log('segundo')
+            }
+            else if( segundosContagem >= segundosTotais ) {
+                stop();
+            }
+
+            if(seg < 10) {
+                seg = parseInt(seg);
+                seg = "0"+seg.toString();
+            }
+             
+            if(min < 10) {
+                min = parseInt(min);
+                min = "0"+min.toString();
+            }
+
+            if(segundosContagem == segundosTotais) {
+                bell.play();
+                finaliza();
+            } else if(segundosContagem % segundosAlerta == 0 && segundosContagem != 0) {
+                alterna.play();
+            }
+                
+            minutos.innerHTML = min;
+            segundos.innerHTML = seg;
+        }
+    </script>
+</body>
+</html>
