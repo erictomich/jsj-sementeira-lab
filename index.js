@@ -24,7 +24,22 @@ http.createServer(function (request, response) {
             //"http" + (request.socket.encrypted ? "s" : "") + "://" + 
           });
         response.end();
-    } else if(reqURL.pathname ==='/contact'){
+    } 
+    else if(reqURL.pathname ==='/bexiga'){
+        response.writeHead(301, {
+            Location: reqURL.origin+'/fluxo_bexiga.html'
+            //"http" + (request.socket.encrypted ? "s" : "") + "://" + 
+          });
+        response.end();
+    }
+    else if(reqURL.pathname ==='/baco'){
+        response.writeHead(301, {
+            Location: reqURL.origin+'/fluxo_baco.html'
+            //"http" + (request.socket.encrypted ? "s" : "") + "://" + 
+          });
+        response.end();
+    }
+    else if(reqURL.pathname ==='/contact'){
         response.write('<h1>contact us page<h1>'); //write a response
         response.end(); //end the response
     } else{
