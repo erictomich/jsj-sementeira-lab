@@ -1,0 +1,9 @@
+{
+    "name": "JSJ",
+    "version": "0.0.1",
+    "description": "JSJ",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js"
+    }
+  }
