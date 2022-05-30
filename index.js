@@ -6,17 +6,17 @@ var path = require('path');
 // http://cangaceirojavascript.com.br/streaming-audio-node/
 
 http.createServer(function (request, response) {
-    console.log("-----------------------");
-    console.log('request: ', request.rawHeaders);
+    //console.log("-----------------------");
+    //console.log('request: ', request.rawHeaders);
 
     var protocol = request.protocol;
-    console.log("PROTOCOLO: ", protocol );
+    //console.log("PROTOCOLO: ", protocol );
 
     var headers = request.headers;
-    console.log("HEADERS: ", headers );
+    //console.log("HEADERS: ", headers );
 
     const reqURL = new URL(request.url, 'http://'+headers.host);
-    console.log('NEW URL: ', reqURL);
+    //console.log('NEW URL: ', reqURL);
     
     if(reqURL.pathname ==='/estomago'){
         response.writeHead(301, {
