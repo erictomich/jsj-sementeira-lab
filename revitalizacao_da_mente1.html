@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/nosleep/0.12.0/NoSleep.min.js" integrity="sha512-DSzvYfxJWRi3E6vfcGQfL5CqOlApxYrrdqRP3hRCnoiZ0oM6+ccYjbtdzQFUrAOI/ehKk0VKFuKs5GseGPkVjQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <title>Fluxo Estômago</title>
+    <title>Revitalização da mente 1</title>
 </head>
 <body>
     <!-- 
@@ -14,7 +14,7 @@
     -->
     <div class="min-w-screen min-h-screen bg-yellow-500 flex items-center justify-center px-5 py-5">
         <div class="">
-            <h1 class="text-4xl text-center font-bold text-violet-600 mb-20">Fluxo do Estômago</h1>
+            <h1 class="text-4xl text-center font-bold text-violet-600 mb-20">Revitalização da Mente 1</h1>
             <h3 class="text-2xl text-center mb-3 font-bold text-violet-600 mb-5" id="acao">Início</h3>
             <div class="text-6xl text-center flex w-full items-center justify-center mt-20">
                 
@@ -33,16 +33,13 @@
                 <button id="btStop" class="px-4 py-2 font-semibold text-sm bg-violet-500 text-white rounded-md shadow-sm hover:scale-125 ease-in-out duration-150 mx-2 p-1">Reinicia</button>
             </div>
             <div class="mt-10">
-                <div><label>Tempo para cada posição:</label> <input type="text" value="60" name="segundos" id="segundosDefinicao"> segundos 
+                <div><label>Tempo para cada posição:</label> <input type="text" value="80" name="segundos" id="segundosDefinicao"> segundos 
                 <button onclick="defineSegundos()" class="px-4 py-2 font-semibold text-sm bg-violet-500 text-white rounded-md shadow-sm hover:scale-125 ease-in-out duration-150 mx-2 p-1">Definir</button></div>
             </div>
-            <div>
+           <div>
                 <br><br><a href="/" class="px-4 py-2 font-semibold text-sm bg-violet-500 text-white rounded-md shadow-sm hover:scale-125 ease-in-out duration-150 mx-2 p-1">Voltar</a>
            </div>
-<<<<<<< HEAD
-=======
             
->>>>>>> 6a4e0d88411902f2892291a2af437d549f3ef60e
         </div>
     </div>
 
@@ -57,24 +54,46 @@
 
         var noSleep = new NoSleep();
 
-        const stomacheFlow = [
-            ["Mão D - TSE 21 E"
-            ,"Mão E - TSE 22 E"]
-            ,"Mão E - TSE 14 D"
-            ,"Mão E - TSE 23 D"
-            ,"Mão E - TSE 14 E"
-            ,"Mão E - TSE 1 alto D"
-            ,"Mão E - TSE 8 baixo D"
-            ,"Mão E - TSE dedo médio do pé D"
+        const flow = [
+         ["PRÁTICA 1",
+          "MD - TSE 1 E"
+         ,"ME - TSE 1 D"]
+         ,"ME - TSE 19 D"
+         ,"MD - TSE 19 E"
+         ,"ME - TSE 1 D"
+         ,[
+             "PRÁTICA 2",
+             "Mão D - topo da cabeça",
+             "Mão E - terceiro olho"
+         ],
+         ["Dedo indicador esquerdo - entre lábio superior e nariz",
+          "Demais dedos tocam o queixo" 
+         ],
+         ["PRÁTICA 3",
+         "MD - TSE 11 E",
+         "ME - TSE 25 E"
+         ],
+         "ME - TSE 15 E",
+         [
+         "ME - TSE 11 D",
+         "MD - TSE 25 D"
+         ],
+         "Mão D - TSE 15 D",
+         ["PRÁTICA 4",
+         "MD - 5 E (opcional 25 D)",
+         "ME - 25 E"
+         ],
+         "ME - 2 E",
+         "ME - 23 E"
         ]
 
         var activateIndex = 0;
-        var stomacheFlowArrayLength = stomacheFlow.length;
-        var stomacheFlowMaxIndex = stomacheFlowArrayLength - 1;
+        var flowArrayLength = flow.length;
+        var flowMaxIndex = flowArrayLength - 1;
 
-        var timeForEachPosition = 5; // seconds
+        var timeForEachPosition = 80; // seconds
 
-        var segundosTotais = stomacheFlowArrayLength * timeForEachPosition;
+        var segundosTotais = flowArrayLength * timeForEachPosition;
         console.log(segundosTotais);
         var segundosAlerta = 60;
         var segundosContagem = 0;
@@ -100,7 +119,7 @@
         var contagem;
 
         function defineTempoTotal () {
-            segundosTotais = stomacheFlowArrayLength * timeForEachPosition;
+            segundosTotais = flowArrayLength * timeForEachPosition;
         }
         function defineSegundos() {
             timeForEachPosition = document.getElementById('segundosDefinicao').value;
@@ -195,7 +214,7 @@
         }
 
         function retornaFrase(index) {
-            let el = stomacheFlow[index];
+            let el = flow[index];
 
              if(Array.isArray(el)) {
                 document.getElementById('acao').innerHTML = el.join("<br>");
